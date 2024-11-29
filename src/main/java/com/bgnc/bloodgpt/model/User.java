@@ -44,10 +44,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private Role role;
 
-    @PrePersist
-    protected void onCreate() {
-        setCreateTime(new Date());
-    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

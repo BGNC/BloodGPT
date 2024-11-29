@@ -19,5 +19,10 @@ public class BaseEntity {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date createTime;
 
+    @PrePersist
+    protected void onCreate() {
+        this.createTime = new Date(); // Otomatik olarak şu anki tarihi ata
+    }
+
 
 }
