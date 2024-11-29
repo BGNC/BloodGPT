@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import static com.bgnc.bloodgpt.config.RestApis.BloodTestControllerApis.*;
+import static com.bgnc.bloodgpt.utils.BloodTestControllerApis.*;
 
 @Tag(name = "Blood Test Analysis", description = "Endpoints for blood test data parsing and analysis.")
 @RequestMapping(BLOOD_TEST_CONTROLLER)

@@ -19,6 +19,7 @@ public enum MessageType {
     CURRENCY_RATE_IS_OCCURED("1008", "The currency rate is occurred"),
     CLIENT_ERROR("1009", "A client error occurred (4xx)"),
     SERVER_ERROR("1010", "A server error occurred (5xx)"),
+    AUTHENTICATION_FAILED_TC_NUMBER("1111", "Authentication failed"),
     GENERAL_EXCEPTION("9999", "The general error.");
 
     private String code;

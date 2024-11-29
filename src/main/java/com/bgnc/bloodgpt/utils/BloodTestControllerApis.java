@@ -1,4 +1,4 @@
-package com.bgnc.bloodgpt.config.RestApis;
+package com.bgnc.bloodgpt.utils;
 
 public class BloodTestControllerApis {
 
