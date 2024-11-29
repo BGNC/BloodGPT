@@ -9,6 +9,8 @@ import com.bgnc.bloodgpt.exception.BaseException;
 import com.bgnc.bloodgpt.exception.ErrorMessage;
 import com.bgnc.bloodgpt.jwt.JWTService;
 import com.bgnc.bloodgpt.model.User;
+import com.bgnc.bloodgpt.model.UserProfile;
+import com.bgnc.bloodgpt.repository.UserProfileRepository;
 import com.bgnc.bloodgpt.repository.UserRepository;
 import com.bgnc.bloodgpt.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class AuthServiceImpl implements AuthService {
     private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
     private final UserRepository userRepository;
+    private final UserProfileRepository userProfileRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
@@ -34,24 +37,36 @@ public class AuthServiceImpl implements AuthService {
     /**
      * Register
      */
+    @Override
+
     public void register(RegisterRequest request) {
         logger.info("Registering user with TC Number: {}", request.getTcNumber());
 
+        // Aynı TC numarasıyla kayıtlı kullanıcı kontrolü
         if (userRepository.findByTcNumber(request.getTcNumber()).isPresent()) {
             logger.warn("Registration failed. TC Number: {} is already registered", request.getTcNumber());
-            throw new RuntimeException("TC number already registered");
+            throw new BaseException(new ErrorMessage<>(MessageType.DUPLICATE_TC_NUMBER, "TC number already registered"));
         }
 
+        // Kullanıcı oluşturuluyor
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .tcNumber(request.getTcNumber())
-                .password(passwordEncoder.encode(request.getPassword())) // Şifre encode ediliyor
+                .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.PATIENT) // Varsayılan rol PATIENT
                 .build();
 
         userRepository.save(user);
         logger.info("User registered successfully with TC Number: {}", request.getTcNumber());
+
+        // Kullanıcı için boş bir profil oluşturuluyor
+        UserProfile profile = UserProfile.builder()
+                .user(user)
+                .build();
+
+        userProfileRepository.save(profile);
+        logger.info("UserProfile created for TC Number: {}", request.getTcNumber());
     }
 
     /**
