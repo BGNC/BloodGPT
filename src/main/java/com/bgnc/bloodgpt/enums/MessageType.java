@@ -20,7 +20,9 @@ public enum MessageType {
     CLIENT_ERROR("1009", "A client error occurred (4xx)"),
     SERVER_ERROR("1010", "A server error occurred (5xx)"),
     AUTHENTICATION_FAILED_TC_NUMBER("1111", "Authentication failed"),
-    GENERAL_EXCEPTION("9999", "The general error.");
+    PROFILE_NOT_FOUND("1234","Profile not found"),
+    GENERAL_EXCEPTION("9999", "The general error."),
+    DUPLICATE_TC_NUMBER("10000", "Duplicate TC number" );
 
     private String code;
     private String message;
