@@ -1,4 +1,4 @@
-İşte BloodGPT projeniz için kapsamlı bir README.md dosyası örneği:
+
 
 # BloodGPT
 
