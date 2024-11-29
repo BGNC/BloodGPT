@@ -81,4 +81,3 @@ Developed by Buğra Onur Genç.
 	•	Email: bugra34055@hotmail.com
 	•	LinkedIn: Bugra Onur Genç
 
-Bu `README.md` dosyası, projenizi detaylı bir şekilde tanımlar ve geliştiriciler veya kullanıcılar için rehber niteliğinde olur. Eklemek veya düzenlemek istediğiniz başka detaylar varsa, lütfen belirtin! 😊
