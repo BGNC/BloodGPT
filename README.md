@@ -21,6 +21,8 @@ BloodGPT is a comprehensive application designed to analyze blood test PDFs and 
   - Linked to hospitals with specialty fields.
   - View and manage patient data.
   - Upload and analyze blood test results.
+-**ADMIN**
+-
 
 ### **BloodAI Model**
 - **Custom AI Development**: BloodAI is a specialized model trained on synthetic and real blood test datasets to provide domain-specific medical insights.
