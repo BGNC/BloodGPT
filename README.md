@@ -95,12 +95,6 @@ springdoc.api-docs.path=/v3/api-docs
 
 
 
-Frontend Setup
-
-	1.	Navigate to the frontend directory:
-
-
-
 
 Dataset Information
 
