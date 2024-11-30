@@ -9,10 +9,10 @@ import com.bgnc.bloodgpt.exception.BaseException;
 import com.bgnc.bloodgpt.exception.ErrorMessage;
 import com.bgnc.bloodgpt.jwt.JWTService;
 import com.bgnc.bloodgpt.model.User;
-import com.bgnc.bloodgpt.model.UserProfile;
-import com.bgnc.bloodgpt.repository.UserProfileRepository;
+
 import com.bgnc.bloodgpt.repository.UserRepository;
 import com.bgnc.bloodgpt.service.AuthService;
+import com.bgnc.bloodgpt.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class AuthServiceImpl implements AuthService {
     private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
     private final UserRepository userRepository;
-    private final UserProfileRepository userProfileRepository;
+    private final UserProfileService userProfileService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
@@ -38,7 +38,6 @@ public class AuthServiceImpl implements AuthService {
      * Register
      */
     @Override
-
     public void register(RegisterRequest request) {
         logger.info("Registering user with TC Number: {}", request.getTcNumber());
 
@@ -48,24 +47,26 @@ public class AuthServiceImpl implements AuthService {
             throw new BaseException(new ErrorMessage<>(MessageType.DUPLICATE_TC_NUMBER, "TC number already registered"));
         }
 
+        // Role kontrolü (Varsayılan PATIENT atanır)
+        Role role = request.getRole() != null ? request.getRole() : Role.PATIENT;
+
         // Kullanıcı oluşturuluyor
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .tcNumber(request.getTcNumber())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.PATIENT) // Varsayılan rol PATIENT
+                .password(passwordEncoder.encode(request.getPassword())) // Şifre encode ediliyor
+                .role(role)
                 .build();
 
         userRepository.save(user);
-        logger.info("User registered successfully with TC Number: {}", request.getTcNumber());
+        logger.info("User registered successfully with TC Number: {}, Role: {}", request.getTcNumber(), role);
 
-        // Kullanıcı için boş bir profil oluşturuluyor
-        UserProfile profile = UserProfile.builder()
-                .user(user)
-                .build();
 
-        userProfileRepository.save(profile);
+        userProfileService.createProfileUser(user);
+
+
+
         logger.info("UserProfile created for TC Number: {}", request.getTcNumber());
     }
 
@@ -91,7 +92,7 @@ public class AuthServiceImpl implements AuthService {
         User user = (User) authentication.getPrincipal();
         String token = jwtService.generateToken(user);
 
-        logger.info("Authentication successful for TC Number: {}", request.getTcNumber());
+        logger.info("Authentication successful for TC Number: {}", passwordEncoder.encode(request.getTcNumber()));
         return new AuthResponse(token);
     }
 }
