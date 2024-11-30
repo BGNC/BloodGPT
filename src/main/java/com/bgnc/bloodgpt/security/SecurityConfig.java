@@ -26,7 +26,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/profile/**").hasAnyRole("PATIENT", "DOCTOR")// Public endpoint'ler
+                        .requestMatchers("/api/profile/**").hasAnyRole("PATIENT", "DOCTOR")
+                        .requestMatchers("/api/doctor/**").hasRole("DOCTOR")// Public endpoint'ler
                         .anyRequest().authenticated() // Tüm diğer istekler doğrulama ister
                 )
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPoint))

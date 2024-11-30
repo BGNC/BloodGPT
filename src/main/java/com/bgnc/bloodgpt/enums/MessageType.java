@@ -22,6 +22,8 @@ public enum MessageType {
     AUTHENTICATION_FAILED_TC_NUMBER("1111", "Authentication failed"),
     PROFILE_NOT_FOUND("1234","Profile not found"),
     GENERAL_EXCEPTION("9999", "The general error."),
+    DOCTOR_NOT_FOUND("1111", "Doctor not found"),
+    HOSPITAL_NOT_FOUND("1112", "Hospital not found"),
     DUPLICATE_TC_NUMBER("10000", "Duplicate TC number" );
 
     private String code;
