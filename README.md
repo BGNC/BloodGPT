@@ -49,7 +49,8 @@ BloodGPT is a comprehensive application designed to analyze blood test PDFs and 
 - **Dataset Handling**: Pandas for data manipulation, and NumPy for numerical operations
 - **Scikit-learn**: For creating custom models if required
 
-### **Frontend**
+### **Frontend**![bloodgpt-photo](https://github.com/user-attachments/assets/99514a3f-6e5f-42f5-907f-58782f20b90a)
+
 - **React.js**
 - **Axios**: For API communication
 - **Material-UI**: For responsive UI components
