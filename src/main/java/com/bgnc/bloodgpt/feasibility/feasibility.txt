@@ -1,0 +1,76 @@
+Proje Fizibilite Raporu: Kan Testi Analiz ve Öneri Sistemi (ChatGPT API Entegrasyonu)
+
+Proje Adı:
+
+Kan Testi Analiz ve Öneri Sistemi (BloodGPT)
+
+Amaç:
+
+Kullanıcıların PDF formatındaki kan testi raporlarını yüklemesini sağlayan, raporları analiz eden ve OpenAI GPT-4 API’si aracılığıyla öneriler sunan bir sistem geliştirmek.
+
+1. Proje Özeti
+
+Bu projede kullanıcılar, kan testi raporlarını sisteme yükleyerek anormal değerlerin tespit edilmesi ve öneriler sunulması hizmetinden faydalanır. Tek bir geliştirici olarak, aşağıdaki bileşenleri inşa edeceksiniz:
+	1.	Spring Boot Backend:
+	•	PDF dosyalarını işler ve veriyi JSON formatına dönüştürür.
+	•	JSON verisini OpenAI GPT-4 API’sine gönderir ve yanıtı işler.
+	2.	OpenAI GPT-4 API Entegrasyonu:
+	•	OpenAI API, gelen veriyi analiz eder ve öneriler oluşturur.
+
+2. Fizibilite Değerlendirmesi
+
+Teknik Fizibilite
+
+Bileşen	Teknoloji	Riskler	Risk Azaltma Stratejileri
+PDF İşleme	Apache Tika, PDFBox	PDF formatının düzensiz olması.	Düzenli ifadeler veya ön işleme kontrolü ile format kontrolü yapılabilir.
+JSON İletişimi	Spring Boot (RestTemplate/WebClient)	API bağlantı sorunları.	Yeniden deneme mekanizması ve hata yönetimi entegre edilmelidir.
+ChatGPT API Kullanımı	OpenAI GPT-4 API	Maliyet ve API limitleri.	Sorgu ve yanıt optimizasyonu.
+Öneri Sunumu	Spring Boot, Basit Web Arayüzü	Yanıtların kullanıcı tarafından anlaşılır olmaması.	Kullanıcı dostu ve sade bir UI tasarımı yapılabilir.
+
+Zaman Yönetimi ve Tek Geliştirici Faktörü
+
+	•	Zaman Yönetimi: Tek bir geliştirici olarak, geliştirme ve test süreçlerini paralel yürütmek önemlidir.
+	•	İş Yükü: Verimli bir proje yönetimi için belirli bir öncelik sıralaması izlenmelidir:
+	1.	PDF işleme ve JSON dönüştürme.
+	2.	OpenAI API entegrasyonu.
+	3.	Basit bir kullanıcı arayüzü geliştirme.
+
+3. Proje Zaman Çizelgesi (Tek Geliştirici İçin)
+
+Aşama	Süre	Açıklama
+Planlama ve Tasarım	1 Hafta	Proje gereksinimlerini belirleme ve iş akışını tasarlama.
+Backend Geliştirme	3 Hafta	Spring Boot ile PDF işleme ve OpenAI GPT-4 API entegrasyonu geliştirme.
+API Entegrasyonu	1 Hafta	GPT-4 API ile iletişim kurma ve yanıtları işleme.
+Frontend Geliştirme	2 Hafta	Basit ve işlevsel bir kullanıcı arayüzü geliştirme (isteğe bağlı).
+Test ve Optimizasyon	2 Hafta	Tüm sistemi test etme ve hata ayıklama.
+Toplam Süre	7-8 Hafta	Projenin tamamlanması.
+
+4. Finansal Fizibilite
+
+Kalem	Tahmini Maliyet (USD)
+OpenAI GPT-4 API	Tahmini aylık $100-$300 (kullanıcı sayısına ve sorgu sıklığına bağlı).
+Sunucu Maliyeti	Aylık $20-$50 (AWS Free Tier başlangıç için uygun).
+Geliştirme Araçları	Mevcut kaynaklar (örneğin, IDE’ler, yerel geliştirme ortamı) kullanılarak ücretsiz.
+Toplam Tahmini Bütçe	$120-$350
+
+5. Riskler ve Çözüm Yolları
+
+1. API Limitleri ve Maliyet:
+
+	•	Çözüm: Verileri sıkıştırarak API’ye gönderin ve yanıt boyutunu optimize edin. Ücretsiz GPT token’lerini kullanmayı değerlendirin.
+
+2. PDF İşleme Zorlukları:
+
+	•	Çözüm: PDF şablonlarının çeşitliliğine uygun bir pre-proses işlemi geliştirin.
+
+3. Tek Geliştirici İş Yükü:
+
+	•	Çözüm: Her hafta belirli bir hedefe odaklanarak ilerleyin ve geliştirme sırasında modüler bir yapı oluşturun.
+
+6. Beklenen Çıktılar
+
+	1.	Kullanıcılar PDF dosyalarını sisteme yükler ve analiz sonuçlarını alır.
+	2.	Sistem, OpenAI GPT-4 API’sini kullanarak kullanıcıya detaylı ve anlamlı öneriler sunar.
+	3.	Basit, etkili ve kullanımı kolay bir web arayüzü sayesinde kullanıcı deneyimi geliştirilir.
+
+
