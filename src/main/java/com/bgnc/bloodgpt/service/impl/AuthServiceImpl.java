@@ -12,6 +12,7 @@ import com.bgnc.bloodgpt.model.User;
 
 import com.bgnc.bloodgpt.repository.UserRepository;
 import com.bgnc.bloodgpt.service.AuthService;
+import com.bgnc.bloodgpt.service.DoctorService;
 import com.bgnc.bloodgpt.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -29,6 +30,7 @@ public class AuthServiceImpl implements AuthService {
     private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
     private final UserRepository userRepository;
+    private final DoctorService doctorService;
     private final UserProfileService userProfileService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -37,6 +39,7 @@ public class AuthServiceImpl implements AuthService {
     /**
      * Register
      */
+
     @Override
     public void register(RegisterRequest request) {
         logger.info("Registering user with TC Number: {}", request.getTcNumber());
@@ -62,12 +65,15 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
         logger.info("User registered successfully with TC Number: {}, Role: {}", request.getTcNumber(), role);
 
-
-        userProfileService.createProfileUser(user);
-
-
-
-        logger.info("UserProfile created for TC Number: {}", request.getTcNumber());
+        // Eğer doktor ise DoctorService kullanarak doktor kaydı yapılır
+        if (role == Role.DOCTOR) {
+            logger.info("Creating doctor profile for TC Number: {}", request.getTcNumber());
+            doctorService.createDoctor(user);
+        } else {
+            // Hasta profili oluştur
+            userProfileService.createProfileUser(user);
+            logger.info("UserProfile created for TC Number: {}", request.getTcNumber());
+        }
     }
 
     /**
