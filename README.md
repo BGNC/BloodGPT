@@ -49,7 +49,7 @@ BloodGPT is a comprehensive application designed to analyze blood test PDFs and 
 - **Dataset Handling**: Pandas for data manipulation, and NumPy for numerical operations
 - **Scikit-learn**: For creating custom models if required
 
-### **Frontend**![bloodgpt-photo](https://github.com/user-attachments/assets/99514a3f-6e5f-42f5-907f-58782f20b90a)
+### **Frontend**!
 
 - **React.js**
 - **Axios**: For API communication
@@ -141,3 +141,5 @@ Contact
 Developed by Buğra Onur Genç.
 	•	Email: bugra34055@hotmail.com
 	•	LinkedIn: Bugra Onur Genç
+ 
+![bloodgpt-photo](https://github.com/user-attachments/assets/9a278616-9a22-4445-a26f-5bc274521c83)
