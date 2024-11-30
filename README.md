@@ -1,8 +1,8 @@
-İşte tek bir README.md dosyasına dönüştürülmüş hali:
+
 
 # BloodGPT
 
-BloodGPT is a comprehensive application designed to analyze blood test PDFs and provide medical insights and recommendations using AI. This project integrates **Spring Boot** for backend development and **ChatGPT API** for processing and interpreting medical data. The application aims to make healthcare data more accessible and insightful for patients and healthcare providers.
+BloodGPT is a comprehensive application designed to analyze blood test PDFs and provide medical insights and recommendations using AI. This project integrates **Spring Boot** for backend development and **ChatGPT API** for processing and interpreting medical data. Additionally, the project leverages **Python** and **BioBERT** for advanced AI-driven analysis of blood test data.
 
 ---
 
@@ -14,7 +14,7 @@ BloodGPT is a comprehensive application designed to analyze blood test PDFs and 
 - **Medical Insights**: The AI provides suggestions and comments based on blood test results, including flagging abnormal values.
 
 ### **Role-Based Access**
-- **Patients**: 
+- **Patients**:
   - Manage profiles (age, height, weight, BMI, email, phone number).
   - Upload blood test results and receive analyses.
 - **Doctors**:
@@ -25,6 +25,7 @@ BloodGPT is a comprehensive application designed to analyze blood test PDFs and 
 ### **BloodAI Model**
 - **Custom AI Development**: BloodAI is a specialized model trained on synthetic and real blood test datasets to provide domain-specific medical insights.
 - **Balanced Dataset**: A synthetic dataset, located in the `data` package, ensures diverse scenarios for AI training, including balanced cases of "High," "Low," and "Normal" flags.
+- **Python Integration**: BloodAI model training and predictions are powered by Python using healthcare-specific AI tools.
 
 ---
 
@@ -40,6 +41,14 @@ BloodGPT is a comprehensive application designed to analyze blood test PDFs and 
 - **Swagger UI**: For API documentation
 - **RESTful API Design**: Adheres to resource-based REST principles and SOLID principles
 
+### **AI and Python**
+- **Python 3.x**: For AI training and predictions
+- **BioBERT**: A pre-trained biomedical natural language processing model
+  - Used for training on structured blood test data
+  - Provides domain-specific medical insights
+- **Dataset Handling**: Pandas for data manipulation, and NumPy for numerical operations
+- **Scikit-learn**: For creating custom models if required
+
 ### **Frontend**
 - **React.js**
 - **Axios**: For API communication
@@ -52,6 +61,7 @@ BloodGPT is a comprehensive application designed to analyze blood test PDFs and 
 ### Prerequisites
 - **Java 17** installed
 - **PostgreSQL** installed and running
+- **Python 3.x** installed with required dependencies
 - **Node.js** installed (for frontend development)
 
 ### Installation
@@ -88,17 +98,8 @@ Frontend Setup
 
 	1.	Navigate to the frontend directory:
 
-cd frontend
 
 
-	2.	Install dependencies:
-
-npm install
-
-
-	3.	Start the frontend application:
-
-npm start
 
 Dataset Information
 
@@ -128,7 +129,7 @@ http://localhost:8091/swagger-ui.html
 
 Future Improvements
 
-	•	Advanced AI Models: Integration with specialized healthcare models like BioBERT for domain-specific insights.
+	•	Advanced AI Models: Enhance BloodAI using BioBERT and healthcare-specific transformers.
 	•	Multi-language Support: To enable analyses and insights in different languages.
 	•	OCR Integration: For handwritten notes in blood test PDFs.
 
