@@ -25,4 +25,7 @@ public class RegisterRequest {
 
     // Role isteğe bağlı (varsayılan olarak PATIENT atanır)
     private Role role = Role.PATIENT; // Varsayılan rol
+
+    // Doktorlar için isteğe bağlı uzmanlık alanı
+    private String specialization;
 }
