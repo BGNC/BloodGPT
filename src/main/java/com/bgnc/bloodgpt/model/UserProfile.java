@@ -1,12 +1,9 @@
 package com.bgnc.bloodgpt.model;
 
-
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -15,8 +12,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class UserProfile extends BaseEntity {
-
-
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

@@ -23,9 +23,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final UserRepository userRepository;
     private final UserProfileRepository userProfileRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserProfileService.class);
-
-
+    private static final Logger logger = LoggerFactory.getLogger(UserProfileServiceImpl.class);
 
 
     /**
