@@ -1,4 +1,4 @@
-package com.bgnc.bloodgpt.dto;
+package com.bgnc.bloodgpt.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
