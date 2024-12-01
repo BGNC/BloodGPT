@@ -1,6 +1,6 @@
 package com.bgnc.bloodgpt.service;
 
-import com.bgnc.bloodgpt.dto.ParsedBloodTestData;
+import com.bgnc.bloodgpt.dto.request.ParsedBloodTestData;
 
 public interface BloodTestAnalysisService {
 

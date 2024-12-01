@@ -1,6 +1,6 @@
 package com.bgnc.bloodgpt.service.impl;
 
-import com.bgnc.bloodgpt.dto.ParsedBloodTestData;
+import com.bgnc.bloodgpt.dto.request.ParsedBloodTestData;
 import com.bgnc.bloodgpt.service.BloodTestAnalysisService;
 
 import lombok.RequiredArgsConstructor;

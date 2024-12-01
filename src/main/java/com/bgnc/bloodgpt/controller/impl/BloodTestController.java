@@ -1,33 +1,32 @@
 package com.bgnc.bloodgpt.controller.impl;
 
 import com.bgnc.bloodgpt.controller.BloodTestControllerApi;
-import com.bgnc.bloodgpt.dto.ParsedBloodTestData;
-import com.bgnc.bloodgpt.service.BloodTestAnalysisService;
-import com.bgnc.bloodgpt.service.FileService;
-import jakarta.validation.Valid;
+import com.bgnc.bloodgpt.dto.response.BloodTestResponse;
+import com.bgnc.bloodgpt.service.BloodTestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import static org.springframework.http.HttpStatus.*;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class BloodTestController implements BloodTestControllerApi {
 
-    private final BloodTestAnalysisService bloodTestAnalysisService;
-    private final FileService fileService;
+    private final BloodTestService bloodTestService;
 
-    @ResponseStatus(OK)
+    @PreAuthorize("hasAnyRole('PATIENT', 'DOCTOR')")
     @Override
-    public ResponseEntity<String> analyzeBloodTest(MultipartFile file) {
+    public ResponseEntity<String> uploadBloodTest(MultipartFile file, String tcNumber, Long doctorId) {
+        bloodTestService.uploadBloodTest(file, tcNumber, doctorId);
+        return ResponseEntity.ok("Blood test uploaded successfully.");
+    }
 
-        @Valid ParsedBloodTestData parsedData = fileService.uploadAndParsePDF(file);
-
-        String analysis = bloodTestAnalysisService.analyzeBloodTest(parsedData);
-
-        return ResponseEntity.ok(analysis);
+    @PreAuthorize("hasAnyRole('PATIENT','DOCTOR')")
+    @Override
+    public ResponseEntity<List<BloodTestResponse>> getUserBloodTests(String tcNumber) {
+        return ResponseEntity.ok(bloodTestService.getUserBloodTests(tcNumber));
     }
 }
