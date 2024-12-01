@@ -50,34 +50,44 @@ public class AuthServiceImpl implements AuthService {
             throw new BaseException(new ErrorMessage<>(MessageType.DUPLICATE_TC_NUMBER, "TC number already registered"));
         }
 
-        // Role kontrolü (Varsayılan PATIENT atanır)
+        /*
+          Check the role for user
+          if the role is empty
+          default value is patient
+          it is defined as a doctor role defined doctor.
+         */
         Role role = request.getRole() != null ? request.getRole() : Role.PATIENT;
 
-        // Kullanıcı oluşturuluyor
+        /*
+          Create user
+         */
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .tcNumber(request.getTcNumber())
-                .password(passwordEncoder.encode(request.getPassword())) // Şifre encode ediliyor
+                .password(passwordEncoder.encode(request.getPassword())) // Password encode.
                 .role(role)
                 .build();
+
 
         userRepository.save(user);
         logger.info("User registered successfully with TC Number: {}, Role: {}", request.getTcNumber(), role);
 
-        // Eğer doktor ise DoctorService kullanarak doktor kaydı yapılır
+        userProfileService.createProfileUser(user);
+        logger.info("UserProfile created for TC Number: {}", request.getTcNumber());
+
+        // If the user role is doctor , create the doctor.
         if (role == Role.DOCTOR) {
             logger.info("Creating doctor profile for TC Number: {}", request.getTcNumber());
             doctorService.createDoctor(user);
-        } else {
-            // Hasta profili oluştur
-            userProfileService.createProfileUser(user);
-            logger.info("UserProfile created for TC Number: {}", request.getTcNumber());
         }
+
     }
 
     /**
      * Authentication
+     * @param request Required fields for login
+     * @return AuthResponse
      */
     public AuthResponse authenticate(AuthRequest request) {
         logger.info("Authenticating user with TC Number: {}", request.getTcNumber());
