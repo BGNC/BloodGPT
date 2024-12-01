@@ -11,4 +11,6 @@ public class AuthenticationControllerApis {
     public static final String AUTH_CONTROLLER = API + AUTH;
     public static final String REGISTER_USER = AUTH_CONTROLLER + REGISTER;
     public static final String LOGIN_USER = AUTH_CONTROLLER + LOGIN;
+    public static final String LOGOUT_USER = AUTH_CONTROLLER + LOGIN;
+    public static final String SECURE_CONFIG_PERMIT_ALL = AUTH_CONTROLLER+"/**";
 }
