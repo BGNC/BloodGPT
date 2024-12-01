@@ -23,8 +23,8 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository doctorRepository;
 
     /**
-     * Kullanıcıyı doktor olarak kaydeder.
-     * @param user Kullanıcı bilgisi
+     * Created as a doctor
+     * @param user User details
      */
     @Override
     public void createDoctor(User user) {
@@ -44,8 +44,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     /**
-     * TC numarasına göre doktor detaylarını getirir.
-     * @param tcNumber Doktorun TC numarası
+     * Gets doctor details by ID number.(TC)
+     * @param tcNumber Doctor's ID number
      * @return DoctorResponse
      */
     @Override
@@ -65,10 +65,10 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     /**
-     * Doktor detaylarını günceller.
-     * @param tcNumber Doktorun TC numarası
-     * @param specialization Yeni uzmanlık alanı
-     * @param hospitalId Yeni hastane ID'si
+     * Updates doctor details.
+     * @param tcNumber Doctor's ID number
+     * @param specialization New specialization
+     * @param hospitalId New hospital ID
      */
     @Override
     public void updateDoctorDetails(String tcNumber, String specialization, Long hospitalId) {
