@@ -1,13 +1,18 @@
 package com.bgnc.bloodgpt.service;
 
 
-
 import com.bgnc.bloodgpt.dto.response.DoctorResponse;
 import com.bgnc.bloodgpt.model.User;
 
+
+
 public interface DoctorService {
 
-
+    /**
+     * Create a doctor record for a registered user.
+     *
+     * @param user The user object for whom the doctor record will be created.
+     */
     void createDoctor(User user);
 
     /**
@@ -26,4 +31,6 @@ public interface DoctorService {
      * @param hospitalId     The ID of the hospital where the doctor works.
      */
     void updateDoctorDetails(String tcNumber, String specialization, Long hospitalId);
+
+
 }

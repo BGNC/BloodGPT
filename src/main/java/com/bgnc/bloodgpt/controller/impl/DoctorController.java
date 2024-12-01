@@ -27,4 +27,6 @@ public class DoctorController implements DoctorControllerApi {
         doctorService.updateDoctorDetails(tcNumber, specialization, hospitalId);
         return ResponseEntity.ok("Doctor details updated successfully");
     }
+
+
 }

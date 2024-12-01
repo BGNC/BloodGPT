@@ -22,4 +22,6 @@ public interface DoctorControllerApi {
             @PathVariable String tcNumber,
             @RequestParam String specialization,
             @RequestParam Long hospitalId);
+
+
 }
