@@ -44,7 +44,7 @@ public class AuthServiceImpl implements AuthService {
     public void register(RegisterRequest request) {
         logger.info("Registering user with TC Number: {}", request.getTcNumber());
 
-        // Aynı TC numarasıyla kayıtlı kullanıcı kontrolü
+        // Check already exists registered with tc number
         if (userRepository.findByTcNumber(request.getTcNumber()).isPresent()) {
             logger.warn("Registration failed. TC Number: {} is already registered", request.getTcNumber());
             throw new BaseException(new ErrorMessage<>(MessageType.DUPLICATE_TC_NUMBER, "TC number already registered"));
