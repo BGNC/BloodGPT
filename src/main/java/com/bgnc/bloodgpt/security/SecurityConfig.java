@@ -12,6 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.bgnc.bloodgpt.utils.AuthenticationControllerApis.SECURE_CONFIG_PERMIT_ALL;
+
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -20,15 +22,19 @@ public class SecurityConfig {
     private final AuthEntryPoint authEntryPoint;
     private final AuthenticationProvider authenticationProvider;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/profile/**").hasAnyRole("PATIENT", "DOCTOR")
-                        .requestMatchers("/api/doctor/**").hasRole("DOCTOR")// Public endpoint'ler
-                        .anyRequest().authenticated() // Tüm diğer istekler doğrulama ister
+                        .requestMatchers(SECURE_CONFIG_PERMIT_ALL).permitAll() // Authentication işlemleri herkese açık
+                        .requestMatchers("/api/profile/**").hasAnyRole("PATIENT", "DOCTOR") // Kullanıcı profilleri
+                        .requestMatchers("/api/doctor/**").hasRole("DOCTOR") // Doktor erişimleri
+                        .requestMatchers("/api/blood-tests/upload").hasAnyRole("PATIENT", "DOCTOR") // Tahlil yükleme
+                        .requestMatchers("/api/blood-tests/{tcNumber}").hasAnyRole("PATIENT","DOCTOR")
+                        //.requestMatchers("/api/doctor-analyze-for-admin/{doctorId}").hasRole("ADMIN")
+                        //.requestMatchers("/api/patient-analyze-for-admin/{tcNumber}").hasRole("ADMIN")// Kullanıcı tahlilleri
+                        .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPoint))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
