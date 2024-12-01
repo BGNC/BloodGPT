@@ -27,7 +27,8 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 
     /**
-     * Kullanıcı profilini döndürür.
+     * return user profile
+     * @param tcNumber
      */
     public ProfileResponse getProfile(String tcNumber) {
         UserProfile userProfile = userProfileRepository.findByUser_TcNumber(tcNumber)
@@ -51,7 +52,9 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 
     /**
-     * Kullanıcı profilini günceller.
+     * update the profile detail for authenticated user
+     * @param tcNumber is unique
+     * @param request updated fields
      */
     @Transactional
     public ProfileResponse updateProfile(String tcNumber, ProfileRequest request) {
@@ -67,7 +70,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         profile.setWeight(request.getWeight());
         profile.setEmail(request.getEmail());
         profile.setPhoneNumber(request.getPhoneNumber());
-        // BMI hesaplaması
+
         if (profile.getHeight() != null && profile.getWeight() != null && profile.getHeight() > 0) {
             profile.setBmi(profile.getWeight() / (profile.getHeight() * profile.getHeight()));
         } else {
@@ -80,7 +83,8 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     /**
-     * ProfileResponse map metodu
+     * Helper
+     * @param profile
      */
     private ProfileResponse mapToResponse(UserProfile profile) {
         ProfileResponse response = new ProfileResponse();
